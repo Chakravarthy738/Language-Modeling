@@ -4,6 +4,7 @@ Name:
 Roll No:
 """
 
+from pyparsing import line
 import language_tests as test
 
 project = "Language" # don't edit this
@@ -17,7 +18,14 @@ Parameters: str
 Returns: 2D list of strs
 '''
 def loadBook(filename):
-    return
+    book=open(filename,"r")
+    lines= book.read()
+    corpus=[]
+    for i in lines.split("\n"):
+        if len(i) > 0:
+           line=i.split(" ")
+           corpus.append(line)   
+    return corpus
 
 
 '''
@@ -289,6 +297,7 @@ if __name__ == "__main__":
     test.week1Tests()
     print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     test.runWeek1()
+    test.testLoadBook()
 
     ## Uncomment these for Week 2 ##
 """
