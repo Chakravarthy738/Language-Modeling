@@ -4,6 +4,7 @@ Name:
 Roll No:
 """
 
+from this import d
 from pyparsing import line
 import language_tests as test
 
@@ -72,8 +73,12 @@ Parameters: 2D list of strs
 Returns: list of strs
 '''
 def getStartWords(corpus):
-    return
-
+    a=[]
+    for i in corpus:
+        if i[0] not in a:
+            a.append(i[0])
+    return a
+    
 
 '''
 countStartWords(corpus)
@@ -82,7 +87,14 @@ Parameters: 2D list of strs
 Returns: dict mapping strs to ints
 '''
 def countStartWords(corpus):
-    return
+    dicts={}
+    for i in corpus:
+        if i[0] not in dicts:
+            dicts[i[0]]=1
+        else:
+            dicts[i[0]]+=1
+    return dicts
+
 
 
 '''
@@ -307,7 +319,10 @@ if __name__ == "__main__":
     #test.testLoadBook()
     #test.testGetCorpusLength()
     #test.testBuildVocabulary()
-    test.testCountUnigrams()
+    #test.testCountUnigrams()
+    test.testGetStartWords()
+    test.testCountStartWords()
+    
 
     ## Uncomment these for Week 2 ##
 """
