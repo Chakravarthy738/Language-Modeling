@@ -5,6 +5,7 @@ Roll No:
 """
 
 from this import d
+from matplotlib import lines
 from pyparsing import line
 import language_tests as test
 
@@ -96,7 +97,6 @@ def countStartWords(corpus):
     return dicts
 
 
-
 '''
 countBigrams(corpus)
 #6 [Check6-1]
@@ -104,9 +104,20 @@ Parameters: 2D list of strs
 Returns: dict mapping strs to (dicts mapping strs to ints)
 '''
 def countBigrams(corpus):
-    return
+    dicts={}
+    for i in corpus:
+        for j in range(len(i)-1):
+            sentence1=i[j]
+            sentence2=i[j+1]
+            if sentence1 not in dicts:
+                dicts[sentence1]={}
+            if sentence2 not in dicts[sentence1]:
+                dicts[sentence1][sentence2]=1
+            else:
+                dicts[sentence1][sentence2]+=1
+    return dicts
 
-
+        
 ### WEEK 2 ###
 
 '''
@@ -320,8 +331,9 @@ if __name__ == "__main__":
     #test.testGetCorpusLength()
     #test.testBuildVocabulary()
     #test.testCountUnigrams()
-    test.testGetStartWords()
-    test.testCountStartWords()
+    #test.testGetStartWords()
+    #test.testCountStartWords()
+    test.testCountBigrams()
     
 
     ## Uncomment these for Week 2 ##
