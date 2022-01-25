@@ -4,6 +4,9 @@ Name:
 Roll No:
 """
 
+from this import d
+from matplotlib import lines
+from pyparsing import line
 import language_tests as test
 
 project = "Language" # don't edit this
@@ -17,7 +20,14 @@ Parameters: str
 Returns: 2D list of strs
 '''
 def loadBook(filename):
-    return
+    book=open(filename,"r")
+    lines= book.read()
+    corpus=[]
+    for i in lines.split("\n"):
+        if len(i) > 0:
+           line=i.split(" ")
+           corpus.append(line)   
+    return corpus
 
 
 '''
@@ -27,7 +37,8 @@ Parameters: 2D list of strs
 Returns: int
 '''
 def getCorpusLength(corpus):
-    return
+    total_length =sum(len(Row) for Row in corpus)
+    return total_length
 
 
 '''
@@ -37,7 +48,8 @@ Parameters: 2D list of strs
 Returns: list of strs
 '''
 def buildVocabulary(corpus):
-    return
+    a= list(set(i for j in corpus for i in j))
+    return a
 
 
 '''
@@ -47,7 +59,12 @@ Parameters: 2D list of strs
 Returns: dict mapping strs to ints
 '''
 def countUnigrams(corpus):
-    return
+    c={}
+    d=list(i for j in corpus for i in j)
+    for i in d:
+        if i not in c:
+            c[i]= d.count(i)     
+    return c
 
 
 '''
@@ -57,8 +74,12 @@ Parameters: 2D list of strs
 Returns: list of strs
 '''
 def getStartWords(corpus):
-    return
-
+    a=[]
+    for i in corpus:
+        if i[0] not in a:
+            a.append(i[0])
+    return a
+    
 
 '''
 countStartWords(corpus)
@@ -67,7 +88,13 @@ Parameters: 2D list of strs
 Returns: dict mapping strs to ints
 '''
 def countStartWords(corpus):
-    return
+    dicts={}
+    for i in corpus:
+        if i[0] not in dicts:
+            dicts[i[0]]=1
+        else:
+            dicts[i[0]]+=1
+    return dicts
 
 
 '''
@@ -77,9 +104,20 @@ Parameters: 2D list of strs
 Returns: dict mapping strs to (dicts mapping strs to ints)
 '''
 def countBigrams(corpus):
-    return
+    dicts={}
+    for i in corpus:
+        for j in range(len(i)-1):
+            sentence1=i[j]
+            sentence2=i[j+1]
+            if sentence1 not in dicts:
+                dicts[sentence1]={}
+            if sentence2 not in dicts[sentence1]:
+                dicts[sentence1][sentence2]=1
+            else:
+                dicts[sentence1][sentence2]+=1
+    return dicts
 
-
+        
 ### WEEK 2 ###
 
 '''
@@ -289,6 +327,14 @@ if __name__ == "__main__":
     test.week1Tests()
     print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     test.runWeek1()
+    #test.testLoadBook()
+    #test.testGetCorpusLength()
+    #test.testBuildVocabulary()
+    #test.testCountUnigrams()
+    #test.testGetStartWords()
+    #test.testCountStartWords()
+    test.testCountBigrams()
+    
 
     ## Uncomment these for Week 2 ##
 """
