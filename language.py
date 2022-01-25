@@ -300,10 +300,10 @@ def setupChartData(corpus1, corpus2, topWordCount):
     for j in topword2:
         if j not in a:
             a.append(j)
-    Probs1=buildUnigramProbs(l,unigramCounts=countUnigrams(corpus1),totalCount=getCorpusLength(corpus1))
-    Probs2=buildUnigramProbs(l,unigramCounts=countUnigrams(corpus2),totalCount=getCorpusLength(corpus2))
+    Probs1=buildUnigramProbs(a,unigramCounts=countUnigrams(corpus1),totalCount=getCorpusLength(corpus1))
+    Probs2=buildUnigramProbs(a,unigramCounts=countUnigrams(corpus2),totalCount=getCorpusLength(corpus2))
     dicts2={}
-    dicts2["topWords"]=l
+    dicts2["topWords"]=a
     dicts2["corpus1Probs"]=Probs1
     dicts2["corpus2Probs"]=Probs2
     return dicts2
@@ -316,7 +316,9 @@ Parameters: 2D list of strs ; str ; 2D list of strs ; str ; int ; str
 Returns: None
 '''
 def graphTopWordsSideBySide(corpus1, name1, corpus2, name2, numWords, title):
-    return
+    compDict=setupChartData(corpus1, corpus2, numWords)
+    sideBySideBarPlots(compDict["topWords"], compDict["corpus1Probs"],compDict["corpus2Probs"], name1, name2, title)
+    return None
 
 
 '''
@@ -326,7 +328,9 @@ Parameters: 2D list of strs ; 2D list of strs ; int ; str
 Returns: None
 '''
 def graphTopWordsInScatterplot(corpus1, corpus2, numWords, title):
-    return
+    compDict=setupChartData(corpus1, corpus2, numWords)
+    scatterPlot( compDict["corpus1Probs"],compDict["corpus2Probs"], compDict["topWords"], title)
+    return None
 
 
 ### WEEK 3 PROVIDED CODE ###
