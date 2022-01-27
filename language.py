@@ -4,6 +4,7 @@ Name:
 Roll No:
 """
 
+from pyparsing import line
 import language_tests as test
 
 project = "Language" # don't edit this
@@ -17,7 +18,14 @@ Parameters: str
 Returns: 2D list of strs
 '''
 def loadBook(filename):
-    return
+    book=open(filename,"r")
+    lines= book.read()
+    corpus=[]
+    for i in lines.split("\n"):
+        if len(i) > 0:
+           line=i.split(" ")
+           corpus.append(line)   
+    return corpus
 
 
 '''
@@ -27,7 +35,8 @@ Parameters: 2D list of strs
 Returns: int
 '''
 def getCorpusLength(corpus):
-    return
+    total_length =sum(len(Row) for Row in corpus)
+    return total_length
 
 
 '''
@@ -37,7 +46,8 @@ Parameters: 2D list of strs
 Returns: list of strs
 '''
 def buildVocabulary(corpus):
-    return
+    a= list(set(i for j in corpus for i in j))
+    return a
 
 
 '''
@@ -289,6 +299,9 @@ if __name__ == "__main__":
     test.week1Tests()
     print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     test.runWeek1()
+    #test.testLoadBook()
+    #test.testGetCorpusLength()
+    test.testBuildVocabulary()
 
     ## Uncomment these for Week 2 ##
 """
