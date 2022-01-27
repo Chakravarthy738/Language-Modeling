@@ -242,12 +242,11 @@ Returns: None
 def graphTop50Words(corpus):
     unigramlist=buildVocabulary(corpus)
     unicount=countUnigrams(corpus)
-    count=len(unigramlist)
+    count=getCorpusLength(corpus)
     UniProb=buildUnigramProbs(unigramlist,unicount,count)
     topWord=getTopWords(50,unigramlist,UniProb,ignore)
     barPlot(topWord,"Top 50 Words")
     return None
-    xx
 
 '''
 graphTopStartWords(corpus)
