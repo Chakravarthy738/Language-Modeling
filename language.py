@@ -1,7 +1,7 @@
 """
 Language Modeling Project
-Name:
-Roll No:
+Name:CH.Nithin Chakravarthy
+Roll No:IIITH-C2-025
 """
 
 from this import d
@@ -171,8 +171,6 @@ def buildBigramProbs(unigramCounts, bigramCounts):
         newdict[prevword]=temp
     return newdict
 
-    return
-
 
 '''
 getTopWords(count, words, probs, ignoreList)
@@ -271,7 +269,12 @@ Parameters: 2D list of strs ; str
 Returns: None
 '''
 def graphTopNextWords(corpus, word):
-    return
+    unigramCounts=countUnigrams(corpus)
+    bigramCounts=countBigrams(corpus)
+    bigramProbs=buildBigramProbs(unigramCounts,bigramCounts)
+    nextWords=getTopWords(10, list(bigramProbs[word].values())[0],list(bigramProbs[word].values())[1], ignore)
+    barPlot(nextWords,"graph top next words")
+    return None
 
 
 '''
